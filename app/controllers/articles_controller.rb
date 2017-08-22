@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(title: params[:title], body: params[:body])
 
     if @article.save
-      render json: { success: true }
+      render json: @article
     else
       render :new
     end
