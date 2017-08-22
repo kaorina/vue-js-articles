@@ -1,10 +1,14 @@
 window.onload = function() {
   var articlesListViewModel = new Vue({
-    el: '#articles-list',
+    el: '#articles-view',
     data: {
-      articles: []
+      articles: [],
+      show: false,
+      loading: false,
+      message: '送信中です',
+      title: '',
+      body: ''
     },
-
     beforeMount: function () {
       var that = this,
           hostname = window.location.hostname,
@@ -19,17 +23,6 @@ window.onload = function() {
           $.ajax(params).done(function(response){
             that.articles = response.articles;
           });
-    }
-  });
-
-  var articleViewModel = new Vue({
-    el: '#article-form',
-    data: {
-      show: false,
-      loading: false,
-      message: '送信中です',
-      title: '',
-      body: ''
     },
     methods: {
       create: function () {
@@ -46,6 +39,7 @@ window.onload = function() {
                 data: { title: that.title, body: that.body }
             };
             $.ajax(params).done(function(response){
+              that.articles.push({ 'id': response.id, 'title':response.title, 'body': response.body });
               that.message = '送信完了しました';
               that.show = false;
               that.title = '';
