@@ -1,4 +1,4 @@
-<div id="articles-view" class="container">
+<div id="articles-view" v-cloak class="container">
   <p id="notice"><%= notice %></p>
   <h1>Articles</h1>
 
@@ -23,7 +23,7 @@
 
   <br>
 
-  <div v-cloak>
+  <div>
     <button @click="show=!show" class="btn btn-info">New Article</button>
     <div v-show="show">
       <div>
